@@ -76,7 +76,7 @@ export default function Home() {
             <h1
               className={`${poppins.className} text-4xl font-extrabold mb-4 text-gray-900`}
             >
-              Turn Past Questions Into Your Secret Weapon
+              Ace the Past, Conquer Present.
             </h1>
             <p className="text-lg text-gray-600">
               BrainQuest turns your past questions into interactive quizzes — so
@@ -101,7 +101,7 @@ export default function Home() {
                     id="email"
                     type="email"
                     placeholder="Enter your email"
-                    className={`mt-1 block w-full rounded-md border border-gray-300 bg-transparent px-4 py-2 shadow-sm focus:border-green-500 focus:ring-green-500 transition-transform transform hover:scale-[1.02] hover:shadow-lg ${
+                    className={`mt-1 block w-full rounded-md border border-gray-300 bg-transparent text-gray-900 px-4 py-2 shadow-sm focus:border-green-500 focus:ring-green-500 transition-transform transform hover:scale-[1.02] hover:shadow-lg ${
                       errors.email ? "border-red-500" : ""
                     }`}
                     {...register("email", {
