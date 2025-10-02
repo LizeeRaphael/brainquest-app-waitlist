@@ -123,28 +123,28 @@ export default function Home() {
                 <div className="text-center">
                   <div className="flex justify-center -space-x-2">
                     <img
-                      src="/avatars/a1.jpg"
+                      src="/student-1.jpeg"
                       alt="Student 1"
                       className="h-10 w-10 rounded-full object-cover border-2 border-white"
                     />
                     <img
-                      src="/avatars/a2.jpg"
+                      src="student-2.jpeg"
                       alt="Student 2"
                       className="h-10 w-10 rounded-full object-cover border-2 border-white"
                     />
                     <img
-                      src="/avatars/a3.jpg"
+                      src="student-3.jpeg"
                       alt="Student 3"
                       className="h-10 w-10 rounded-full object-cover border-2 border-white"
                     />
                     <img
-                      src="/avatars/a4.jpg"
+                      src="student-4.jpg"
                       alt="Student 4"
                       className="h-10 w-10 rounded-full object-cover border-2 border-white"
                     />
                   </div>
                   <p className="mt-2 text-gray-700 font-medium">
-                    Join <span className="text-green-600">2,545</span> others
+                    Join <span className="text-green-600">2,547</span> others
                     waiting for the launch
                   </p>
 
