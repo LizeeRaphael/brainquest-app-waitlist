@@ -204,7 +204,7 @@ export default function Home() {
                 className="bg-white rounded-xl shadow p-6 text-center transition transform hover:scale-105 hover:shadow-xl"
               >
                 <feat.icon className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                <h3 className="text-lg font-semibold">{feat.title}</h3>
+                <h3 className="text-lg font-semibold text-gray-900">{feat.title}</h3>
               </div>
             ))}
           </div>
