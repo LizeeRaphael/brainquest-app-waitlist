@@ -23,13 +23,26 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // ✅ Updated onSubmit function with Mailchimp integration
   const onSubmit = async (data: WaitlistForm) => {
     try {
-      console.log("New waitlist signup:", data.email);
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.email }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || "Subscription failed");
+      }
+
+      console.log("✅ Mailchimp success:", result);
       setSubmitted(true);
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error("Waitlist submission error:", error);
-      setErrorMessage("Something went wrong. Try again later.");
+      setErrorMessage(error.message || "Something went wrong. Try again later.");
     }
   };
 
@@ -45,7 +58,6 @@ export default function Home() {
       {/* ✅ Top Green Section */}
       <div className="bg-gradient-to-b from-green-400 to-green-600 pb-16 relative z-10">
         <div className="container mx-auto px-4 pt-16 text-center">
-          {/* Logo Badge with bigger circle */}
           <span className="inline-flex items-center bg-white/20 backdrop-blur-md text-white rounded-full px-5 py-3 text-sm font-semibold mb-6 shadow-md">
             <span className="h-4 w-4 rounded-full bg-white mr-2"></span>
             BrainQuest Waitlist
@@ -53,7 +65,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ✅ Bottom White Section with falling snow */}
+      {/* ✅ Bottom White Section */}
       <div className="relative bg-white flex-1 -mt-12 rounded-t-3xl shadow-lg z-10 overflow-hidden">
         {/* Snow effect */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -89,7 +101,6 @@ export default function Home() {
           {!submitted ? (
             <div className="max-w-lg mx-auto bg-gray-50 rounded-xl shadow-md p-8 relative z-10">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {/* Email Input */}
                 <div>
                   <label
                     htmlFor="email"
@@ -148,7 +159,6 @@ export default function Home() {
                     waiting for the launch
                   </p>
 
-                  {/* Rating */}
                   <div className="flex justify-center mt-2">
                     {[1, 2, 3, 4].map((i) => (
                       <Star
@@ -195,7 +205,7 @@ export default function Home() {
           {/* ✅ Features */}
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { icon: FileText, title: "Real-time Past Questions" },
+              { icon: FileText, title: "Upload Past Questions" },
               { icon: Puzzle, title: "Gamified Learning" },
               { icon: Users, title: "Study With Friends" },
             ].map((feat, i) => (
@@ -204,7 +214,9 @@ export default function Home() {
                 className="bg-white rounded-xl shadow p-6 text-center transition transform hover:scale-105 hover:shadow-xl"
               >
                 <feat.icon className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                <h3 className="text-lg font-semibold text-gray-900">{feat.title}</h3>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  {feat.title}
+                </h3>
               </div>
             ))}
           </div>
@@ -240,30 +252,3 @@ export default function Home() {
     </div>
   );
 }
-
-
-
-
-// "use client";
-
-// import Header from "@/components/Header";
-// import SignupForm from "@/components/SignupForm";
-// import Footer from "@/components/Footer";
-
-// export default function Page() {
-//   return (
-//     <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex flex-col justify-between items-center px-4 py-8">
-//       <Header />
-
-//       {/* Placeholder hero image */}
-//       <img
-//         src="/hero-placeholder.png"
-//         alt="BrainQuest Illustration"
-//         className="w-80 md:w-[400px] mx-auto mb-8"
-//       />
-
-//       <SignupForm />
-//       <Footer />
-//     </main>
-//   );
-// }
