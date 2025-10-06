@@ -42,16 +42,24 @@
 //   }
 // }
 
+
+
+
+
+
+
+
+
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const { email } = await req.json();
-
-  if (!email) {
-    return NextResponse.json({ error: "Email is required" }, { status: 400 });
-  }
-
   try {
+    const { email } = await req.json();
+
+    if (!email) {
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
+    }
+
     const API_KEY = process.env.MAILCHIMP_API_KEY!;
     const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID!;
     const DATACENTER = process.env.MAILCHIMP_API_SERVER!;
@@ -61,7 +69,7 @@ export async function POST(req: Request) {
       {
         method: "POST",
         headers: {
-          Authorization: `apikey ${API_KEY}`,
+          Authorization: `Basic ${Buffer.from(`anystring:${API_KEY}`).toString("base64")}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -71,18 +79,15 @@ export async function POST(req: Request) {
       }
     );
 
+    const data = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json();
-      return NextResponse.json(
-        { error: errorData.detail || "Failed to subscribe" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: data.detail || "Failed to subscribe" }, { status: 400 });
     }
 
-    return NextResponse.json({ message: "Successfully subscribed" });
+    return NextResponse.json({ message: "Successfully joined" });
   } catch (err) {
     console.error("Mailchimp error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
-
