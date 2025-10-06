@@ -1,25 +1,30 @@
-"use client"; // ✅ ensures this component only renders on the client
+"use client";
 
 import { useMemo } from "react";
 
-const NUM_DOTS = 30;
+interface FallingDotsProps {
+  count?: number; // optional, default to 30
+  color?: string; // optional, default to 'bg-green-300'
+}
 
-export default function FallingDots() {
-  // Generate dot positions and animation timings once per client render
+export default function FallingDots({
+  count = 30,
+  color = "bg-green-300",
+}: FallingDotsProps) {
   const dots = useMemo(() => {
-    return Array.from({ length: NUM_DOTS }, () => ({
+    return Array.from({ length: count }, () => ({
       left: `${Math.random() * 100}%`,
-      animationDuration: `${Math.random() * 10 + 5}s`, // 5s - 15s
-      animationDelay: `${Math.random() * 10}s`, // 0s - 10s
+      animationDuration: `${Math.random() * 10 + 5}s`,
+      animationDelay: `${Math.random() * 10}s`,
     }));
-  }, []);
+  }, [count]);
 
   return (
     <div className="relative w-full h-full overflow-hidden">
       {dots.map((dot, idx) => (
         <div
           key={idx}
-          className="absolute w-2 h-2 rounded-full bg-green-300 animate-fall"
+          className={`absolute w-2 h-2 rounded-full ${color} animate-fall`}
           style={{
             left: dot.left,
             animationDuration: dot.animationDuration,
