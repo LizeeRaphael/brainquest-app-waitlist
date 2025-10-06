@@ -294,9 +294,12 @@ export default function Home() {
       setSubmitted(true);
     } catch (error: unknown) {
       console.error("Waitlist submission error:", error);
-      setErrorMessage(
-        error.message || "Something went wrong. Try again later."
-      );
+
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage("Something went wrong. Try again later.");
+      }
     }
   };
 
