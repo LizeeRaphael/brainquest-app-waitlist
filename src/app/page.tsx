@@ -177,7 +177,7 @@ export default function Home() {
           {/* Features */}
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { icon: FileText, title: "Upload Past Questions" },
+              { icon: FileText, title: "Real-time Past Questions" },
               { icon: Puzzle, title: "Gamified Learning" },
               { icon: Users, title: "Study With Friends" },
             ].map((feat, i) => (
@@ -192,7 +192,9 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <br />
           <p>See below...</p>
+          <br />
           {/* ✅ Insert Header Component Right After the Hero */}
           <div className="mb-12">
             <Header />

@@ -19,7 +19,7 @@ export default function Header() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-12 bg-gradient-to-r from-green-500 via-white to-green-500">
+    <main className="min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-12 bg-gradient-to-r from-green-500 via-white to-green-500 rounded-b-[80px] shadow-md overflow-hidden">
       {/* Left Section */}
       <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left space-y-6">
         <h1
